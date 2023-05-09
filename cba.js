@@ -12,7 +12,7 @@ const fromEmail = 'david.whiting@h2o.ai';
 // set the environment variable $APP_PASSWORD
 // const appPassword = process.env.APP_PASSWORD;
 
-async function createCbaPdf(username, cert_date, input='CBA-H2O_form.pdf') {
+async function createCbaPdf(username, cert_date, input='form/CBA-H2O_form.pdf') {
   try {
       const pdfDoc = await PDFDocument.load(await readFile(input));
       const form = pdfDoc.getForm();
@@ -41,7 +41,7 @@ async function createCbaPdf(username, cert_date, input='CBA-H2O_form.pdf') {
 
 function sendCbaCert(filename, toEmail, fromE=fromEmail, passwd=appPassword) {
   const pdfFile = fs.readFileSync(filename);
-  const pdfAttach = fs.readFileSync("cba_boot_camp.pdf");
+  const pdfAttach = fs.readFileSync("form/cba_boot_camp.pdf");
 
   let transporter = nodemailer.createTransport({
     service: 'gmail',
