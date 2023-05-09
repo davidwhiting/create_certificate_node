@@ -5,9 +5,6 @@ const csv = require('csv-parser');
 const xlsx = require('xlsx');
 //const createPdf = require('./createPdf');
 
-var date = '19 April 2023';
-var course = 'H2O World India: Hands-on Driverless AI Training';
-
 async function createPdf(username, cert_date, course, input='certificate_form.pdf') {
     try {
         const pdfDoc = await PDFDocument.load(await readFile(input));
@@ -71,12 +68,27 @@ async function loopOverXlsx(inputFile) {
     console.log('Certificates generated for all rows!');
 }
 
+async function loopOverExcel(inputFile, date, course) {
+    const workbook = xlsx.readFile(inputFile);
+    const worksheet = workbook.Sheets['Sheet1'];
 
-// Test
+    const rows = xlsx.utils.sheet_to_json(worksheet, { header: 1 }).slice(1);
 
-var username = 'Shivam Bansal';
+    rows.forEach((row) => {
+      try {
+        const [first, last] = row;
+	var username = first + ' ' + last;
+        createPdf(username, date, course);
+      } catch (err) {
+        console.error(`Error generating certificate for row ${row}`, err);
+      }
+    });
 
-createPdf(username, date, course);
+    console.log('Certificates generated for all rows!');
+}
 
-// loopOverCsv('input.csv');
+export { createPdf, loopOverCsv, loopOverXlsx, loopOverExcel }
 
+
+// app password
+// vfmenvhsnqplrvzl
