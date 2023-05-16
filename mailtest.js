@@ -12,7 +12,7 @@ const fromEmail = 'david.whiting@h2o.ai';
 // set the environment variable $APP_PASSWORD
 // const appPassword = process.env.APP_PASSWORD;
 
-async function createPdf(username, cert_date, course, input='certificate_form.pdf') {
+async function createPdf(username, cert_date, course, input='form/certificate_form.pdf') {
   try {
       const pdfDoc = await PDFDocument.load(await readFile(input));
       const form = pdfDoc.getForm();
@@ -153,7 +153,8 @@ async function loopOverExcel(inputFile, theSheet, fromEmail, appPassword) {
 
 // Try with test case
 
-
-loopOverExcel("H2OWorld.xlsx", 'Execute', fromEmail, appPassword);
+createPdf("Amol Shanbhag", "20 April 2023", "Beginner's H2O Driverless AI Training")
+ 
+// loopOverExcel("H2OWorld.xlsx", 'Execute', fromEmail, appPassword);
 // loopOverExcel("H2OWorld.xlsx", 'CBA', fromEmail, appPassword);
 

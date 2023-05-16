@@ -116,5 +116,5 @@ async function loopOverCbaExcel(inputFile, theSheet, fromEmail, appPassword) {
 // Try with test case
 
 // createCbaPdf("Ben Simmonds", "20 April 2023");
-loopOverCbaExcel("cba.xlsx", 'Test', fromEmail, appPassword);
+loopOverCbaExcel("CBA.xlsx", 'Final', fromEmail, appPassword);
 
