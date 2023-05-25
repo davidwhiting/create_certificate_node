@@ -1,16 +1,20 @@
-const appPassword = 'vfmenvhsnqplrvzl';
-const readline = require('readline');
+// Javascript code to fill out the CBA Bootcamp Certifications
+// Edit execute command at bottom of file
+// "node cba.js" to run
 
+// set the sender email address before running
+const fromEmail = '';
+
+// Set the environment variable $APP_PASSWORD before running
+// This is required for authentication to gmail
+const appPassword = process.env.APP_PASSWORD;
+
+const readline = require('readline');
 const { PDFDocument } = require('pdf-lib');
 const { readFile, writeFile } = require('fs/promises');
 const fs = require('fs');
 const xlsx = require('xlsx');
-
 const nodemailer = require('nodemailer');
-const fromEmail = 'david.whiting@h2o.ai';
-
-// set the environment variable $APP_PASSWORD
-// const appPassword = process.env.APP_PASSWORD;
 
 async function createCbaPdf(username, cert_date, input='form/CBA-H2O_form.pdf') {
   try {
@@ -105,7 +109,7 @@ async function loopOverCbaExcel(inputFile, theSheet, fromEmail, appPassword) {
       await sendCbaCert(output, toEmail);
       console.log(`Certificate sent to ${toEmail} for ${username}`);
     } catch (error) {
-      console.log(`Error generating or sending certificate for ${username}`, error);
+      console.log(`Error generating or sending certificate to ${username}`, error);
     }
   }
 
@@ -114,7 +118,7 @@ async function loopOverCbaExcel(inputFile, theSheet, fromEmail, appPassword) {
 
 
 // Try with test case
-
 // createCbaPdf("Ben Simmonds", "20 April 2023");
-loopOverCbaExcel("CBA.xlsx", 'Final', fromEmail, appPassword);
 
+// Run for a excel spreadsheet list of particpants
+// loopOverCbaExcel("CBA.xlsx", 'Final', fromEmail, appPassword);
